@@ -1,6 +1,6 @@
 ### Added:
 - 
 ### Fixed:
-- Fixed render edge case
-### Changed:
 - 
+### Changed:
+- Updated to mc 1.20.6

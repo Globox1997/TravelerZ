@@ -10,11 +10,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.world.biome.Biome;
-import net.travelerz.network.TravelerzClientPacket;
+import net.travelerz.network.packet.TravelerPacket;
 
 @Environment(EnvType.CLIENT)
 @Mixin(ClientPlayerEntity.class)
@@ -31,7 +32,7 @@ public class ClientPlayerEntityMixin extends AbstractClientPlayerEntity {
     private void tickMixin(CallbackInfo info) {
         Biome biome = this.getWorld().getBiomeAccess().getBiome(this.getBlockPos()).value();
         if (this.travelerBiome != biome) {
-            TravelerzClientPacket.writeC2STravelerPacket();
+            ClientPlayNetworking.send(new TravelerPacket(0));
             this.travelerBiome = biome;
         }
 
