@@ -35,10 +35,11 @@ public class InGameHudMixin {
         return original + (int) (TravelerzMain.CONFIG.titleY * 2.0f);
     }
 
-    @ModifyVariable(method = "renderTitleAndSubtitle", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/client/font/TextRenderer;getWidth(Lnet/minecraft/text/StringVisitable;)I", ordinal = 0), ordinal = 2)
+    @ModifyVariable(method = "renderTitleAndSubtitle", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/client/font/TextRenderer;getWidth(Lnet/minecraft/text/StringVisitable;)I", ordinal = 0), ordinal = 1)
     private int renderModifyTitlePosXMixin(int original) {
         return original + TravelerzMain.CONFIG.titleX;
-    }
+    }// Lnet/minecraft/client/font/TextRenderer;getWidth(Lnet/minecraft/text/StringVisitable;)I
+     // net/minecraft/client/font/TextRenderer.getWidth (Lnet/minecraft/text/StringVisitable;)I
 
     @ModifyVariable(method = "renderTitleAndSubtitle", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/client/font/TextRenderer;getWidth(Lnet/minecraft/text/StringVisitable;)I", ordinal = 1), ordinal = 3)
     private int renderModifySubtitlePosXMixin(int original) {
