@@ -19,11 +19,11 @@ public class TravelerServerPacket {
 
         ServerPlayNetworking.registerGlobalReceiver(TravelerPacket.PACKET_ID, (payload, context) -> {
             payload.mobLevel();
-            context.player().server.execute(() -> {
+            context.server().execute(() -> {
                 SkeletonEntity skeletonEntity = EntityType.SKELETON.create(context.player().getWorld());
                 skeletonEntity.refreshPositionAndAngles(context.player().getX(), context.player().getY(), context.player().getZ(), 0.0f, 0.0f);
                 if (isRpgDifficultyLoaded) {
-                    MobStrengthener.changeAttributes(skeletonEntity, context.player().getWorld());
+                    MobStrengthener.changeAttributes(skeletonEntity, context.player().getServerWorld(), null, false);
                 }
                 ServerPlayNetworking.send(context.player(), new TravelerPacket(NameplateTracker.getMobLevel(skeletonEntity)));
                 skeletonEntity.discard();
