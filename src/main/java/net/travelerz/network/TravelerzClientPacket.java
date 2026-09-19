@@ -26,7 +26,9 @@ public class TravelerzClientPacket {
                     Text biomeName = getBiomeName(client);
                     if (biomeName != null) {
                         client.inGameHud.setTitle(Text.translatable("hud.travelerz.title", biomeName));
-                        client.inGameHud.setSubtitle(Text.translatable("hud.travelerz.subtitle", mobLevel));
+                        if (mobLevel >= 0) {
+                            client.inGameHud.setSubtitle(Text.translatable("hud.travelerz.subtitle", mobLevel));
+                        }
                     }
                 }
             });
