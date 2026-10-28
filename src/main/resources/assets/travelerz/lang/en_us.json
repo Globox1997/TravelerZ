@@ -7,6 +7,8 @@
     "text.autoconfig.travelerz.option.titleX": "Title X",
     "text.autoconfig.travelerz.option.titleY": "Title Y",
     "text.autoconfig.travelerz.option.excludedBiomes": "Excluded Biomes",
+    "text.autoconfig.travelerz.option.biomeChangeDelay": "Biome Change Delay (Ticks)",
+    "text.autoconfig.travelerz.option.titleCooldown": "Title Cooldown (Seconds)",
 
     "biome.oblivion.oblivion_forest": "Forest",
     "biome.oblivion.oblivion_ocean": "Ocean",

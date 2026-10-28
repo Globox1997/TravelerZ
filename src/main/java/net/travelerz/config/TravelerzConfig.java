@@ -2,6 +2,7 @@ package net.travelerz.config;
 
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
 import java.util.ArrayList;
@@ -15,5 +16,8 @@ public class TravelerzConfig implements ConfigData {
     public int titleY = 0;
     @Comment("Entry example: minecraft:plains")
     public ArrayList<String> excludedBiomes = new ArrayList<>();
+    @ConfigEntry.BoundedDiscrete(min = 0, max = 200)
+    public int biomeChangeDelay = 30;
+    public int titleCooldown = 60;
 
 }

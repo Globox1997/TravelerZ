@@ -3,46 +3,14 @@ package net.travelerz.network;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.biome.Biome;
-import net.travelerz.TravelerzMain;
-import net.travelerz.mixin.InGameHudAccess;
 import net.travelerz.network.packet.TravelerPacket;
-import org.jetbrains.annotations.Nullable;
+import net.travelerz.util.BiomeTitleHandler;
 
 @Environment(EnvType.CLIENT)
 public class TravelerzClientPacket {
 
     public static void init() {
-        ClientPlayNetworking.registerGlobalReceiver(TravelerPacket.PACKET_ID, (payload, context) -> {
-            int mobLevel = payload.mobLevel();
-            context.client().execute(() -> {
-                MinecraftClient client = context.client();
-                if (((InGameHudAccess) client.inGameHud).getTitle() == null) {
-                    Text biomeName = getBiomeName(client);
-                    if (biomeName != null) {
-                        client.inGameHud.setTitle(Text.translatable("hud.travelerz.title", biomeName));
-                        if (mobLevel >= 0) {
-                            client.inGameHud.setSubtitle(Text.translatable("hud.travelerz.subtitle", mobLevel));
-                        }
-                    }
-                }
-            });
-        });
-    }
-
-    @Nullable
-    private static Text getBiomeName(MinecraftClient client) {
-        Registry<Biome> registry = client.player.getWorld().getRegistryManager().get(RegistryKeys.BIOME);
-        Identifier biomeIdentifier = registry.getId(client.player.getWorld().getBiome(client.player.getBlockPos()).value());
-        if (TravelerzMain.CONFIG.excludedBiomes.contains(biomeIdentifier.getNamespace() + ":" + biomeIdentifier.getPath())) {
-            return null;
-        }
-        return Text.translatable("biome." + biomeIdentifier.getNamespace() + "." + biomeIdentifier.getPath());
+        ClientPlayNetworking.registerGlobalReceiver(TravelerPacket.PACKET_ID, (payload, context) -> BiomeTitleHandler.onLevelReceived(payload.mobLevel()));
     }
 
 }

@@ -5,8 +5,12 @@ import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.travelerz.config.TravelerzConfig;
 import net.travelerz.network.TravelerServerPacket;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TravelerzMain implements ModInitializer {
+
+    public static final Logger LOGGER = LoggerFactory.getLogger("travelerz");
 
     public static TravelerzConfig CONFIG = new TravelerzConfig();
 
